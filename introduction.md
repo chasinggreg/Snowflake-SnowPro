@@ -2,7 +2,7 @@
 
 ## First chapter: Introduction to Snowflake.
 
-![Intro Banner](./Assets/1_uobeTvRkjAUkwKNJ3Odcog.png)
+![Intro Banner](./Assets/Chapter-1-Introduction.png)
 
 Hello everyone. In this first chapter, we will look at the Snowflake basics, apart from the typical exam questions they usually ask in the Snowflake SnowPro Core Certification Exam. These are the concepts that we are going to study in this chapter:
 
