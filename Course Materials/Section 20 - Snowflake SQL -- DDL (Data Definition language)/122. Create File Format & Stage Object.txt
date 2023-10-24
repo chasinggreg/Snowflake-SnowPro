@@ -1,0 +1,7 @@
+-- Create parquet format
+create or replace file format demo_db.public.parquet_format
+  type = 'parquet';
+
+-- Create stage object
+create or replace stage demo_db.public.mystage
+  file_format = demo_db.public.parquet_format;

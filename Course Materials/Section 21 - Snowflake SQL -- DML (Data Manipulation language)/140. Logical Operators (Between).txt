@@ -1,0 +1,8 @@
+# Logical Operator - Between
+    ----This operator helps user to pass on a range of values between which they want to see as the output
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_CENTER_SK >= '4' and CC_CALL_CENTER_SK <= '9';
+    
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_CENTER_SK between '4' and '9';

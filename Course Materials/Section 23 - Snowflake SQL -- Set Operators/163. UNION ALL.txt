@@ -1,0 +1,26 @@
+--- UNION ALL ---
+    -- The UNION ALL operator is used to combine the results of two SELECT statements including duplicate rows.
+    -- The same rules that apply to the UNION clause will apply to the UNION ALL operator.
+
+select * from employees
+UNION ALL
+select * from new_employees;
+
+select dept from employees
+UNION ALL
+select dept from new_employees;
+
+select employee_id, dept from employees
+UNION ALL
+select dept from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+UNION ALL
+select * from new_employees;
+
+create table xyz as
+select * from employees where empl_join_date >= '2016-01-01'
+UNION ALL
+select * from new_employees where dept = 'Tech';
+
+select * from xyz;

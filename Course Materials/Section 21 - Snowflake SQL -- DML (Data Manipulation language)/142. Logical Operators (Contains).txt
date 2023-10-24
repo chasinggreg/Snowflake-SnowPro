@@ -1,0 +1,9 @@
+# Logical Operator - Contains
+    ----This operator can be used to find out if one string contains another string. It can be applied to whole column
+    
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE contains (c_name, '134');
+
+SELECT CONTAINS('snowflake', 'fl') as contains_example from dual;
+    
+SELECT CONTAINS('snowflake', 'flk') as contains_example from dual;

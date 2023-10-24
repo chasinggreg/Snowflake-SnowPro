@@ -1,0 +1,7 @@
+-- SUBQUERY in HAVING statement
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+group by c_mktsegment
+having acct_bal > (select avg(avg_acctbal) from 
+                   (select sum(c_acctbal) as avg_acctbal from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" group by c_mktsegment));

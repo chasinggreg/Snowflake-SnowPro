@@ -1,0 +1,77 @@
+---------------------- SQL Functions ----------------------
+/*
+-- SQL provides many built-in functions to perform operations on data. 
+-- These functions are useful while performing mathematical calculations, string concatenations, sub-strings, date & time etc.
+-- SQL functions can be broadly categorized into following categories:
+    - Scalar functions: functions that take a single row/value as input and return a single value
+    - Aggregate functions: functions that take multiple rows/values as input and return a single value
+    - Window functions: subset of aggregate functions that can operate on a subset of rows
+    - Table functions: functions that return results in tabular format
+    - System functions: functions that perform control operations or return system-level information
+*** We will work on couple of functions from each of above categories.
+
+We have already seen below functions:
+1.) AVG
+2.) COUNT
+3.) SUM
+4.) MIN
+5.) MAX
+6.) ROW_NUMBER
+
+-- Other important functions
+ABS
+ADD_MONTHS
+AS_DATE, AS_CHAR, AS_INTEGER
+CASE
+CAST
+CEIL, FLOOR
+CHARINDEX
+COALESCE
+COMPRESS
+CONCAT
+CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP
+DATE_PART
+DATE_TRUNC
+DATEADD
+DATEDIFF
+DAYNAME
+RANK, DENSE_RANK
+STARTSWITH, ENDSWITH
+EXTRACT
+GET_DDL
+HASH
+HOUR/MINUTE/SECOND
+IFF
+IFNULL
+INSERT
+IS_DATE, IS_CHAR, IS_INTEGER
+LAG
+LAST_DAY
+LEFT
+RIGHT
+LEN, LENGTH
+LOWER, UPPER
+LTRIM, RTRIM
+MOD
+MONTHNAME
+NVL
+REPLACE
+REVERSE
+RIGHT
+SPLIT
+SPLIT_PART
+SUBSTR, SUBSTRING
+SYSDATE
+TO_DATE, TO_CHAR, TO_INTEGER
+TRANSLATE
+TRIM
+TRUNCATE, TRUNC
+YEAR/DAY/WEEK/MONTH/QUARTER
+
+--SYSTEM FUNCTIONS:
+CURRENT_ACCOUNT
+CURRENt_USER
+CURRENT_SESSION
+CURRENT_ROLE
+CURRENT_REGION
+*/

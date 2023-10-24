@@ -1,0 +1,94 @@
+-- SELF JOIN (VERY IMPORTANT TO UNDERSTAND THE CONCEPT)
+-- A self join is a join in which a table is joined with itself
+create or replace table employee(id number,
+                                 name varchar(20),
+                                manager_id number);
+
+insert into employee values(2, 'A', 9),
+                           (5, 'B', 9),
+                           (9, 'C', 6),
+                           (1, 'D', 4),
+                           (6, 'E', 3);
+
+select * from employee;
+
+select a.id, a.name as manager_name
+from employee a inner join employee b
+on a.id = b.manager_id;
+
+select distinct a.id, a.name as manager_name
+from employee a inner join employee b
+on a.id = b.manager_id;
+
+
+-- Real world example for self join
+
+create or replace table employee(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+                     
+insert into employee values(1,'2014-10-01','HR',40000,4),
+                                 (2,'2014-09-01','Tech',50000,9),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (4,'2017-09-01','HR',10000,5),
+                                 (5,'2019-09-01','HR',35000,9),
+                                 (6,'2015-09-01','Tech',90000,4),
+                                 (7,'2016-09-01','Marketing',20000,1);
+
+select * from employee;
+
+SELECT e.employee_id, e.manager_id
+FROM
+    employee e,employee m
+where e.manager_id = m.employee_id 
+    and e.empl_join_date < m.empl_join_date;
+    
+
+-- JOIN multiple tables in one query
+
+create or replace table A(id number,
+               name varchar(20));
+               
+create or replace table B(id number,
+               salary number);
+               
+create or replace table C(id number,
+               dept varchar(20));               
+               
+select * from A;
+select * from B;
+select * from C;
+
+insert into A values(1,'A'),
+                    (2,'B'),
+                    (3,'C'),
+                    (5,'D');
+                    
+insert into B values(1,100),
+                    (2,200),
+                    (3,300);
+                    
+insert into C values(1,'HR'),
+                    (2,'TECH'),
+                    (3,'HR'),
+                    (7,'TECH'),
+                    (8,'MARKETING'),
+                    (5,'HR');
+                    
+select * from A;  
+select * from B;
+select * from C;
+
+select A.*, B.salary, C.dept
+from A left join B
+on A.id = B.id
+left join C
+on B.id = C.id;
+
+select C.*, B.salary, A.name
+from A left join B
+on A.id = B.id
+right join C
+on B.id = C.id;

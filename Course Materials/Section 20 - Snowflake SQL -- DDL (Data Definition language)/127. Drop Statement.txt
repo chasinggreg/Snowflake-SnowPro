@@ -1,0 +1,10 @@
+----------------- DROP -----------------
+-- delete objects from the database permenently.
+
+drop table employee.empl_details;
+drop schema demo_db.empl;
+drop database company;
+drop warehouse test;
+drop view demo_db.public.myview;
+drop stage if exists mystage;
+drop file format if exists parquet_format;

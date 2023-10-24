@@ -1,0 +1,17 @@
+# Logical Operator - Like
+    ----This operator can be used to detect values which are following some pattern
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE c_comment like 'a%';
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE c_comment like '%s';
+    
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE c_comment like '%package%';
+    
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE c_name like 'Customer#0000134%';
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    WHERE c_name like '_____________134%';

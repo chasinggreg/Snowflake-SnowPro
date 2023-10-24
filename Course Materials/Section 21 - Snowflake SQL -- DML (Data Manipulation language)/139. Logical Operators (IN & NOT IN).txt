@@ -1,0 +1,14 @@
+# Logical Operators
+
+//IN - used to include multiple values in where condition
+//NOT IN - used to exclude specific values from the condition
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_cENTER_SK = '4' or CC_CALL_cENTER_SK = '12' or CC_CALL_cENTER_SK = '18' 
+        or CC_CALL_cENTER_SK = '24' or CC_CALL_cENTER_SK = '45';
+
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_cENTER_SK IN (4,12,18,24,45) or CC_CLASS IN ('medium', 'large');
+    
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_cENTER_SK NOT IN (4,12,18,24,45);

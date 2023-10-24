@@ -1,0 +1,43 @@
+---------------------- INFORMATION SCHEMA ----------------------
+/*
+-- Each database created in snowlfake account automatically includes a built-in, read-only schema named INFORMATION_SCHEMA. 
+-- The schema contains the following objects:
+    -- Views for all the objects contained in the database, 
+       as well as views for account-level objects (i.e. non-database objects such as roles, warehouses, and databases)
+    -- Table functions for historical and usage data across your account.
+    -- All other metadata about tables, schemas, views, columns, pipes, procedures etc. of the Database
+*/
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."INFORMATION_SCHEMA"."COLUMNS" order by table_schema;
+select * from "SNOWFLAKE_SAMPLE_DATA"."INFORMATION_SCHEMA"."TABLES";
+
+select * 
+from "SNOWFLAKE_SAMPLE_DATA"."INFORMATION_SCHEMA"."TABLES"
+where table_schema = 'TPCH_SF001';
+
+drop table customer;
+
+SELECT 'drop table '||table_name||';' as drop_tables
+FROM  "SNOWFLAKE_SAMPLE_DATA"."INFORMATION_SCHEMA"."TABLES" tables 
+WHERE table_schema = 'TPCH_SF001'
+ORDER BY 1;
+
+drop table CUSTOMER;
+drop table JCUSTOMER;
+drop table JLINEITEM;
+drop table JNATION;
+drop table JORDERS;
+drop table JPART;
+drop table JPARTSUPP;
+drop table JREGION;
+drop table JSUPPLIER;
+drop table LINEITEM;
+drop table NATION;
+drop table ORDERS;
+drop table PART;
+drop table PARTSUPP;
+drop table REGION;
+drop table SUPPLIER;
+
+select * from information_schema.load_history where table_name = 'EMPLOYEE';
+METADATA$FILE_ROW_NUMBER;

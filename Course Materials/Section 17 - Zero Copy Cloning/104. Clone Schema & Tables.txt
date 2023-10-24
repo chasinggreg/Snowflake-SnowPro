@@ -1,0 +1,18 @@
+--Clone a schema and all objects within the schema at its current state:
+
+create schema employee_perm_clone clone employee_perm;
+
+
+-- Clone a table at its current state:
+
+create table employees_clone clone demo_db.public.employees;
+
+create table employees_transient_clone clone demo_db.employee_perm.employees_transient;
+
+create transient table employees_transient_clone clone demo_db.employee_perm.employees_transient;
+
+create table employees_temp_clone clone demo_db.employee_perm.employees_temp;
+
+create temporary table employees_temp_clone clone demo_db.employee_perm.employees_temp;
+
+create transient table employees_temp_clone_trans clone demo_db.employee_perm.employees_temp;

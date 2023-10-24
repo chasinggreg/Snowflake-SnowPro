@@ -1,0 +1,89 @@
+CREATE SCHEMA EMPLOYEE;
+USE SCHEMA EPLOYEE;
+
+CREATE ROLE ANALYST;
+CREATE ROLE ANALYST_REAL;
+CREATE ROLE DEVELOPER;
+
+-- create a masking policy administrator custom role
+
+CREATE ROLE masking_admin;
+
+-- grant privileges to masking_admin role
+
+GRANT CREATE MASKING POLICY on SCHEMA employee to ROLE masking_admin;
+
+GRANT APPLY MASKING POLICY on ACCOUNT to ROLE masking_admin;
+
+-- Create a employee table
+create or replace table employee_info(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+
+-- insert values into employee table
+insert into employee_info values(1,'2014-10-01','HR',40000,4),
+                                 (2,'2014-09-01','Tech',50000,9),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (4,'2017-09-01','HR',10000,5),
+                                 (5,'2019-09-01','HR',35000,9),
+                                 (6,'2015-09-01','Tech',90000,4),
+                                 (7,'2016-09-01','Marketing',20000,1);
+
+-- grant select privilege to analyst roles
+GRANT SELECT ON TABLE DEMO_DB.EMPLOYEE.EMPLOYEE_INFO TO ROLE ANALYST;
+GRANT SELECT ON TABLE DEMO_DB.EMPLOYEE.EMPLOYEE_INFO TO ROLE ANALYST_REAL;
+GRANT SELECT ON TABLE DEMO_DB.EMPLOYEE.EMPLOYEE_INFO TO ROLE DEVELOPER;
+
+-- assign roles to a user
+GRANT ROLE ANALYST_REAL TO USER <YOUR_USER_NAME>;
+GRANT ROLE ANALYST TO USER <YOUR_USER_NAME>;
+GRANT ROLE DEVELOPER TO USER <YOUR_USER_NAME>;
+
+-- grant warehouse access to roles
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE ANALYST_REAL;
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE ANALYST;
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE DEVELOPER;
+
+-- grant schema access to roles
+GRANT USAGE ON SCHEMA EMPLOYEE TO ROLE ANALYST_REAL;
+GRANT USAGE ON SCHEMA EMPLOYEE TO ROLE ANALYST;
+GRANT USAGE ON SCHEMA EMPLOYEE TO ROLE DEVELOPER;
+
+
+-- CREATE MASKING POLICY
+/*
+Currently, Snowflake does not support different input and output data types in a masking policy, 
+such as defining the masking policy to target a timestamp and return a string (e.g. ***MASKED***); 
+the input and output data types must match.
+*/
+create or replace masking policy sensitive_info_masking_numbers as (val NUMBER) returns number ->
+  case
+    when current_role() in ('ANALYST_REAL', 'ACCOUNTADMIN') then val
+    else '99999999999999999999'
+  end;
+  
+create or replace masking policy sensitive_info_masking_strings as (val STRING) returns STRING ->
+  case
+    when current_role() in ('ANALYST_REAL', 'DEVELOPER', 'ACCOUNTADMIN') then val
+    else '**********'
+  end;
+  
+
+-- APPLY MASKING POLICY TO A TABLE's NUMBER COLUMN
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN salary SET MASKING POLICY sensitive_info_masking_numbers;
+
+
+-- APPLY THE MASKING POLICY TO A TABLE's STRING COLUMN
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN dept SET MASKING POLICY sensitive_info_masking_strings;
+
+-- SEE MASKING IN ACTION
+USE ROLE ANALYST_REAL;
+SELECT * FROM EMPLOYEE_INFO;
+
+USE ROLE ANALYST;
+SELECT * FROM EMPLOYEE_INFO;
+
+USE ROLE DEVELOPER;
+SELECT * FROM EMPLOYEE_INFO;

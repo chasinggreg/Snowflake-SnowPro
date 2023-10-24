@@ -1,0 +1,40 @@
+-- COMPRESS: Compresses the input string or binary value with a compression method.
+    -- outputs binary value/hexadecimal characters for readability.
+/* snowflake supported compression methods:
+    SNAPPY
+    ZLIB
+    ZSTD
+    BZ2
+*/
+select *, compress(c_mktsegment, 'snappy') as new_mktsegment from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+-- CONCAT: Concatenates one or more strings, or concatenates one or more binary values. 
+        -- If any of the values is null, the result is also null.
+-- The || operator provides alternative syntax for CONCAT and requires at least two arguments.
+select *, concat(c_name, ' - ', c_mktsegment) as new_identifier from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+select concat('Kashish ', 'Gakkar');
+
+-- UPPER: Converts the string into UPPERCASE
+-- LOWER: Converts the string into LOWERCASE
+select *, 
+    upper(c_comment) as uppercase_comment,
+    lower(c_mktsegment) as lowercase_segment
+    from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+    
+-- SUBSTR, SUBSTRING: Returns the portion of the string or binary value from original string. Length is optional parameter.
+-- SUBSTR(string, start_pos, length) or SUBSTRING(string, start_pos, length)
+select *, 
+        substr(c_mktsegment, 2, 5) as short_segment ,
+        substring(c_mktsegment, 2, 4) as same_short_segment 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" limit 10;
+
+
+select *, 
+        substr(c_mktsegment, 2) as short_segment ,
+        substring(c_mktsegment, 2, 4) as same_short_segment 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" limit 10;
+
+select *, 
+        substr(c_mktsegment, 2) as short_segment ,
+        substring(c_mktsegment, -4, 2) as same_short_segment 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" limit 10;

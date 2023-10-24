@@ -1,0 +1,14 @@
+// create view
+-- a materialized view is a database object that contains the results of a query. 
+-- For example, it may be a local copy of data located remotely, 
+--      or may be a subset of the rows and/or columns of a table or join result, or may be a summary using an aggregate function
+
+create view myview as 
+    select * 
+    from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" 
+    where c_custkey <= 5;
+
+select * from myview;
+
+---- To know more about snowflake views, refer to below URL:
+-- https://docs.snowflake.com/en/sql-reference/sql/create-view.html

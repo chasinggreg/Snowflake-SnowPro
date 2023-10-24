@@ -1,0 +1,42 @@
+------ ALTER DATABASE
+-- Modifies the properties for an existing database, including the following:
+    -- Changing the name of the database or changing the Time Travel data retention period 
+                -- (only available in ENTERPRISE or BUSINESS CRITICAL snowflake editions)
+    -- Enabling and managing database replication and failover.
+
+ALTER DATABASE IF EXISTS COMPANY RENAME TO PRODUCTION;
+ALTER DATABASE IF EXISTS PRODUCTION RENAME TO COMPANY;
+
+------ ALTER SCHEMA
+-- Modifies the properties for an existing schema, including renaming the schema or swapping it with another schema, 
+    // and changing the Time Travel data retention period
+    
+ALTER SCHEMA IF EXISTS EMPLOYEE RENAME TO EMPL;
+
+create or replace schema employee;
+create schema if not exists department;
+create or replace table demo_db.employee.empl_details(empl_id number);
+create or replace table demo_db.department.dept_details(dept_id number);
+
+ALTER SCHEMA IF EXISTS DEMO_DB.DEPARTMENT SWAP WITH DEMO_DB.EMPLOYEE;
+
+ALTER SCHEMA IF EXISTS DEMO_DB.DEPARTMENT
+SET DATA_RETENTION_TIME_IN_DAYS = 2,
+    COMMENT = 'DEPARTMENT DETAILS SCHEMA';
+    
+SELECT * FROM "DEMO_DB"."INFORMATION_SCHEMA"."SCHEMATA"
+WHERE SCHEMA_NAME = 'DEPARTMENT';
+    
+show schemas;
+    
+------ ALTER TABLE
+-- Modifies the properties, columns, or constraints for an existing table.
+
+ALTER TABLE IF EXISTS DEPARTMENT.DEPT_DETAILS RENAME TO DEPARTMENT_DETAILS;
+
+ALTER TABLE IF EXISTS EMPLOYEE.DEPARTMENT_DETAILS RENAME TO DEPARTMENT.DEPARTMENT_DETAILS;
+
+create or replace table demo_db.department.department_employees(dept_id number,
+                                                               empl_name varchar(40));
+                                                               
+ALTER TABLE IF EXISTS DEMO_DB.DEPARTMENT.DEPARTMENT_DETAILS SWAP WITH DEMO_DB.DEPARTMENT.DEPARTMENT_EMPLOYEES;

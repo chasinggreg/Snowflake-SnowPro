@@ -1,0 +1,20 @@
+-------------------- EXAMPLE 3 - DELETE ------------------------
+
+select * from employees_stream;
+
+SELECT SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream');
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;
+
+-- Create a table to store the details of employees
+DELETE FROM employees WHERE SALARY < 40000;
+
+select * from employees_stream;
+
+DELETE FROM employees_consumer WHERE EMPLOYEE_ID IN (select DISTINCT employee_id
+                                from employees_stream 
+                                where METADATA$ACTION = 'DELETE' and METADATA$ISUPDATE = 'FALSE');
+
+select * from employees_consumer;
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;

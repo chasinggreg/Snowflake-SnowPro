@@ -1,0 +1,29 @@
+/************** CASE - search condition **************/
+
+select *, case 
+    when dept = 'HR' then '1'
+    when dept = 'Tech' then '2' 
+    end as flag
+from employee;
+
+-- another method to write multiple conditions
+select *, case 
+    when dept = 'HR' then '1'
+    when dept = 'Tech' and employee_id = 6 then '2' 
+    end as flag
+from employee;
+
+-- ELSE keyword
+select *, case 
+    when dept = 'HR' then 'Human Resource'
+    when dept = 'Tech' and employee_id = 6 then 'Technology' 
+    else 'INVALID DEPT'
+    end as flag
+from employee;
+
+select employee_id, manager_id, empl_join_date, case 
+    when dept = 'HR' then 'HRA'
+    when dept = 'Tech' and employee_id = 6 then 'TECHY'
+    else 'INVALID'
+    end as dept
+from employee;

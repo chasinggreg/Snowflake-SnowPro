@@ -1,0 +1,27 @@
+--------- Create TRANSIENT Schema ---------
+CREATE OR REPLACE TRANSIENT SCHEMA EMPLOYEE;
+
+SHOW SCHEMAS;
+
+create or replace table EMPLOYEES(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+
+SHOW TABLES;
+
+DROP SCHEMA EMPLOYEE;
+
+
+--------- Create PERMANENT Schema ---------
+CREATE OR REPLACE SCHEMA EMPLOYEE_PERM;
+SHOW SCHEMAS;
+
+create or replace table EMPLOYEES(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+
+SHOW TABLES;

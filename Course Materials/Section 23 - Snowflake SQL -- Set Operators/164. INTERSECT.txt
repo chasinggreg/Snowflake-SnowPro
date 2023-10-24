@@ -1,0 +1,27 @@
+--- INTERSECT ---
+/*
+    -- The SQL INTERSECT clause/operator is used to combine two SELECT statements, 
+       but returns rows only from the first SELECT statement that are identical to a row in the second SELECT statement. 
+       This means INTERSECT returns only common rows returned by the two SELECT statements.
+    -- Just as with the UNION operator, the same rules apply when using the INTERSECT operator
+*/
+
+select * from employees
+INTERSECT
+select * from new_employees;
+
+select dept from employees
+INTERSECT
+select dept from new_employees;
+
+select employee_id, dept from employees
+INTERSECT
+select dept from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+INTERSECT
+select * from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+INTERSECT
+select * from new_employees where dept = 'Tech';

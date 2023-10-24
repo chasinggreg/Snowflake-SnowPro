@@ -1,0 +1,68 @@
+/*
+What is TIME TRAVEL and how it is used in SNOWFLAKE?
+-- Snowflake Time Travel enables accessing historical data (i.e. data that has been changed or deleted) at any point within a defined period. 
+-- It serves as a powerful tool for performing the following tasks:
+    - Restoring data-related objects (tables, schemas, and databases) that may have been accidentally or intentionally deleted.
+    - Duplicating and backing up data from key points in the past.
+    - Analyzing data usage/manipulation over specified periods of time.
+*/
+
+-- SET DATA_RETENTION_TIME_IN_DAYS PROPERTY FOR TIME TRAVEL
+
+create or replace table employees(employee_id number,
+                     salary number,
+                     manager_id number)
+                   data_retention_time_in_days=90;
+                     
+SHOW TABLES;
+                     
+create or replace table employees_test(employee_id number,
+                     salary number,
+                     manager_id number)
+                     data_retention_time_in_days=95;
+                     
+alter table employees set data_retention_time_in_days=30;
+
+SHOW TABLES;
+
+
+-- If retention period is changed for account or individual objects then retention period will be changed for all lower level objects as well unless explicitly set
+
+USE SCHEMA EMPLOYEE_PERM;
+
+create or replace table employees_new(employee_id number,
+                     salary number,
+                     manager_id number)
+                   data_retention_time_in_days=90;
+                     
+insert into employees values(8,40000,4),
+                                 (12,50000,9),
+                                 (3,30000,5),
+                                 (4,10000,5),
+                                 (25,35000,9),
+                                 (12,50000,9),
+                                 (86,90000,4),
+                                 (73,20000,1);
+                     
+SHOW TABLES;
+
+create or replace transient table employees_transient(employee_id number,
+                     salary number,
+                     manager_id number);
+                     
+create or replace temporary table employees_temp(employee_id number,
+                     salary number,
+                     manager_id number);
+                     
+show tables;
+
+
+SHOW SCHEMAS;
+
+SELECT * FROM DEMO_DB.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'EMPLOYEE_PERM';
+
+ALTER SCHEMA DEMO_DB.EMPLOYEE_PERM set data_retention_time_in_days=55;
+
+SHOW SCHEMAS;
+
+SELECT * FROM DEMO_DB.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'EMPLOYEE_PERM';

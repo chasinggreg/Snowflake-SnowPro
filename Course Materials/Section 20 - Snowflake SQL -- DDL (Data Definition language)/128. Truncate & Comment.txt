@@ -1,0 +1,27 @@
+----------------- TRUNCATE -----------------
+-- remove all records from a table, including all memory spaces allocated for the records are removed
+
+TRUNCATE TABLE DEMO_DB.PUBLIC.A;
+TRUNCATE TABLE IF EXISTS DEMO_DB.DEPARTMENT.DEPARTMENT_DETAILS;
+
+----------------- COMMENT -----------------
+-- add comments to the data dictionary
+-- overwrites an existing comment for an existing object.
+-- can be added to all objects (users, roles, warehouses, databases, tables, etc.). 
+-- can be added to individual table columns as well.
+
+COMMENT IF EXISTS ON SCHEMA DEMO_DB.DEPARTMENT IS 'TEST Department Schema xyz';
+
+SHOW SCHEMAS LIKE 'DEPARTMENT';
+
+DESC SCHEMA DEPARTMENT;
+
+COMMENT IF EXISTS ON TABLE DEMO_DB.DEPARTMENT.DEPARTMENT_EMPLOYEES IS 'ALL ABOUT DEPARTMENT DETAILS';
+
+SHOW TABLES LIKE 'DEPARTMENT_EMPLOYEES';
+
+DESC TABLE DEMO_DB.DEPARTMENT.DEPARTMENT_EMPLOYEES;
+
+select * from "DEMO_DB"."INFORMATION_SCHEMA"."TABLES" where table_Schema = 'DEPARTMENT';
+
+select count(distinct table_name) from "DEMO_DB"."INFORMATION_SCHEMA"."TABLES" where table_Schema = 'DEPARTMENT';

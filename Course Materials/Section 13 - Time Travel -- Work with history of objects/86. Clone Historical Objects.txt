@@ -1,0 +1,17 @@
+-- CLONE HISTORICAL OBJECTS
+
+-- create a duplicate of the object at a specified point in the object’s history
+
+select current_timestamp();
+
+
+-- following CREATE TABLE command creates a clone of a table as of the date and time represented by the specified timestamp:
+create table restored_table clone employees
+  at(timestamp => '2020-09-10 21:06:16.694 +0000'::timestamp);
+  
+-- following CREATE SCHEMA command creates a clone of a schema and all its objects as they existed 1 hour before the current time:
+create schema restored_schema clone employee_perm at(offset => -600);
+
+-- following CREATE DATABASE command creates a clone of a database and all its objects as they existed prior to the completion of the specified statement:
+create database restored_db clone demo_db
+  before(statement => '0196d7b8-00d6-37a7-0000-45750002d1ce');

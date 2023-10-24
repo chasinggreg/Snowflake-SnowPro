@@ -1,0 +1,15 @@
+-------------------- SUB QUERIES --------------------
+/*
+ "DEMO_DB"."EMPLOYEE"
+******* Subquery can be simply defined as a query within another query *******
+
+-- RULES for Subqueries:
+    - You can place Subquery in following SQL clauses: WHERE, HAVING and FROM.
+    - They can be used with SELECT, UPDATE, INSERT, DELETE statements along with expression operator. 
+      It could be equality operator or comparison operator such as =, >, =, <= and Like operator.
+    - A subquery is a query within another query. The outer query is called as main query and inner query is called as subquery.
+    - The subquery generally executes first, and its output is used to complete the query condition for the main or outer query.
+    - Subquery must be enclosed in parentheses.
+    - Subqueries are on the right side of the comparison operator.
+    - ORDER BY command cannot be used in a Subquery. GROUPBY command can be used to perform same function as ORDER BY command.
+*/

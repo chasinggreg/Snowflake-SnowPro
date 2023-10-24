@@ -1,0 +1,8 @@
+# 1.) Arithmetic Operators
+select o_totalprice,
+    (o_totalprice + o_custkey) as tot_price_custkey_add,
+    (o_totalprice - o_custkey) as tot_price_custkey_minus,
+    (o_totalprice * 2) as tot_price_multiply2,
+    (o_totalprice / 3) as tot_price_division3,
+    (o_totalprice % 4) as tot_price_modulus4
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."ORDERS";

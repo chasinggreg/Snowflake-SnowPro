@@ -1,0 +1,37 @@
+-- DESCRIBE MASKING POLICY
+USE ROLE ACCOUNTADMIN;
+DESC MASKING POLICY sensitive_info_masking_strings;
+DESC MASKING POLICY sensitive_info_masking_numbers;
+
+
+
+-- DO THE OPPOSITE, MENTION ROLES WHICH SHOULD SEE MASKED DATA
+create or replace masking policy sensitive_info_masking_numbers as (val NUMBER) returns number ->
+  case
+  when current_role() not in ('ANALYST') then val
+    else '99999999999999999999'
+  end;
+  
+create or replace masking policy sensitive_info_masking_strings as (val STRING) returns STRING ->
+  case
+    when current_role() not in ('ANALYST') then val
+    else '**********'
+  end;
+
+-- UNSET MASKING POLICIES
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN salary UNSET MASKING POLICY;
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN dept UNSET MASKING POLICY;
+
+-- APPLY MASKING POLICY TO A TABLE's NUMBER COLUMN
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN salary SET MASKING POLICY sensitive_info_masking_numbers;
+
+
+-- APPLY THE MASKING POLICY TO A TABLE's STRING COLUMN
+ALTER TABLE IF EXISTS EMPLOYEE_INFO MODIFY COLUMN dept SET MASKING POLICY sensitive_info_masking_strings;
+
+-- SEE MASKING IN ACTION
+USE ROLE ANALYST_REAL;
+SELECT * FROM EMPLOYEE_INFO;
+
+USE ROLE ANALYST;
+SELECT * FROM EMPLOYEE_INFO;

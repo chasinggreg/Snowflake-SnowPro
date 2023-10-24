@@ -1,0 +1,10 @@
+---------------------- LIMIT and OFFSET ----------------------
+-- LIMIT: used to restrict the number of rows in the output
+-- OFFSET: used to skip first N rows
+    -- OFFSET cannot be used alone, it should be used with LIMIT keyword
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" limit 10;
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" offset 5;
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" limit 10 offset 8;

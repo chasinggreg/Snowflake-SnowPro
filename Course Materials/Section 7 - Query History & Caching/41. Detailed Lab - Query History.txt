@@ -1,0 +1,15 @@
+alter warehouse compute_wh suspend;
+
+select count(*) from "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF100TCL"."CALL_CENTER";
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF100TCL"."CALL_CENTER";
+
+-- run same query one more time
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF100TCL"."CALL_CENTER";
+
+-- using where condition
+select * 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF100TCL"."CALL_CENTER"
+WHERE CC_CALL_CENTER_SK <= 5;
+
+SELECT current_session();

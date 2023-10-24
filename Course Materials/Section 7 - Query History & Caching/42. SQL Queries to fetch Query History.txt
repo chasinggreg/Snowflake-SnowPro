@@ -1,0 +1,42 @@
+-- Retrieve up to the last 100 queries run in the current session:
+
+select *
+from table(information_schema.query_history_by_session())
+order by start_time;
+
+select *
+from table(information_schema.query_history_by_warehouse())
+order by start_time;
+
+select *
+from table(information_schema.query_history_by_user())
+order by start_time;
+
+-- include a condition on username
+select *
+from table(information_schema.query_history_by_user())
+where user_name like 'KASHISH%'
+order by start_time;
+
+
+-- Retrieve up to the last 100 queries run by the current user (or run by any user on any warehouse on which the current user has the MONITOR privilege):
+
+select *
+from table(information_schema.query_history())
+order by start_time;
+
+-- Retrieve up to the last 100 queries run in the past hour by the current user 
+-- (or run by any user on any warehouse on which the current user has the MONITOR privilege):
+
+select *
+from table(information_schema.query_history(dateadd('hours',-1,current_timestamp()),current_timestamp()))
+order by start_time;
+
+
+-- Retrieve all queries run by the current user (or run by any user on any warehouse on which the current user has the MONITOR privilege) 
+-- within a specified 30 minute block of time within the past 7 days:
+
+select *
+  from table(information_schema.query_history(
+  end_time_range_start=>to_timestamp_ltz('2020-09-11 12:00:00.000 -0700'),
+    end_time_range_end=>to_timestamp_ltz('2020-09-24 12:30:00.000 -0700')));

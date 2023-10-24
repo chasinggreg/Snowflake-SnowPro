@@ -1,0 +1,49 @@
+--- MINUS ---
+    -- The SQL MINUS operator is used to return all rows in the first SELECT statement that are not returned by the second SELECT statement. 
+    -- Each SELECT statement will define a dataset. 
+    -- The MINUS operator will retrieve all records from the first dataset and then remove from the results all records from the second dataset.
+select * from employees
+MINUS
+select * from new_employees;
+
+select dept from employees
+MINUS
+select dept from new_employees;
+
+select employee_id, dept from employees
+MINUS
+select dept from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+MINUS
+select * from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+MINUS
+select * from new_employees where dept = 'Tech';
+
+--- EXCEPT ---
+    -- There is absolutely no difference in the EXCEPT clause and the MINUS clause. 
+    -- They both serve the same purpose and they are simply two different ways of achieving the same functionality.
+    -- The SQL EXCEPT operator is used to return all rows in the first SELECT statement that are not returned by the second SELECT statement. 
+    -- Each SELECT statement will define a dataset. 
+    -- The EXCEPT operator will retrieve all records from the first dataset and then remove from the results all records from the second dataset.
+select * from employees
+EXCEPT
+select * from new_employees;
+
+select dept from employees
+EXCEPT
+select dept from new_employees;
+
+select employee_id, dept from employees
+EXCEPT
+select dept from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+EXCEPT
+select * from new_employees;
+
+select * from employees where empl_join_date >= '2016-01-01'
+EXCEPT
+select * from new_employees where dept = 'Tech';

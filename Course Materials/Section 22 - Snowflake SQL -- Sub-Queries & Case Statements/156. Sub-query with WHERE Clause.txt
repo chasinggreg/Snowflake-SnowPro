@@ -1,0 +1,29 @@
+-- SUBQUERY in WHERE clause
+
+select * 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+where c_custkey IN
+                (select distinct o_custkey 
+                 from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+                 where o_orderpriority = '5-LOW');
+                 
+select * 
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+where c_custkey IN
+                (select distinct o_custkey 
+                 from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+                 where o_orderpriority = '5-LOW' 
+                       and o_orderdate >= '1996-01-01');
+
+
+-- SUBQUERY in FROM and WHERE clauses
+
+select *
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" A
+left join (select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+           where o_orderpriority = '5-LOW') B
+on A.c_custkey = B.o_custkey
+where c_custkey IN
+                (select distinct o_custkey 
+                 from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+                 where c_acctbal > 5000);

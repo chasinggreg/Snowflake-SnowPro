@@ -1,0 +1,33 @@
+-- Create ROLE and USER. Then grant privileges.
+
+CREATE OR REPLACE ROLE TEST_ROLE;
+CREATE ROLE IF NOT EXISTS TEST_ROLE;
+
+GRANT ALL PRIVILEGES ON DATABASE DEMO_DB TO ROLE TEST_ROLE;
+GRANT ALL PRIVILEGES ON SCHEMA EMPLOYEE TO ROLE TEST_ROLE;
+GRANT ALL PRIVILEGES ON TABLE A TO ROLE TEST_ROLE;
+GRANT ALL PRIVILEGES ON TABLE EMPLOYEE.A TO ROLE TEST_ROLE;
+
+USE ROLE TEST_ROLE;
+
+GRANT ROLE TEST_ROLE TO USER KASHISHGAKKAR;
+
+
+CREATE OR REPLACE USER TEST_USER PASSWORD = 'ABC123' DEFAULT_ROLE = 'PUBLIC' MUST_CHANGE_PASSWORD = TRUE;
+
+// GRANT PRIVILEGES TO ROLE
+-- Grants one or more access privileges on a securable object to a role. 
+-- The privileges that can be granted are object-specific and are grouped into the following categories:
+    -- Global privileges
+    -- Privileges for account objects (resource monitors, virtual warehouses, and databases)
+    -- Privileges for schemas
+    -- Privileges for schema objects (tables, views, stages, file formats, UDFs, and sequences)
+
+
+// GRANT ROLE
+    -- Assigns a role to a user or another role:
+    -- Granting a role to another role creates a “parent-child” relationship between the roles (also referred to as a role hierarchy).
+    -- Granting a role to a user enables the user to perform all operations allowed by the role 
+        -- (through the access privileges granted to the role).
+        
+SHOW GRANTS;

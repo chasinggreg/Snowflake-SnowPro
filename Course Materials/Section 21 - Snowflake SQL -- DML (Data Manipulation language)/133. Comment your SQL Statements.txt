@@ -1,0 +1,8 @@
+/* ---------------HOW TO COMMENT---------------
+SELECT CC_CALL_CENTER_SK,CC_CALL_CENTER_SK * 5 AS FIFTH_OF_CC_CALL_CENTER_SK  FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+
+--Below sQL statement is fetching all rows from call_Center table where cc_sk is less than 5 and cc_class is large
+//Below sQL statement is fetching all rows from call_Center table where cc_sk is less than 5 and cc_class is large
+SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF10TCL"."CALL_CENTER"
+    WHERE CC_CALL_cENTER_SK < 5 AND CC_CLASS = 'large'
+*/

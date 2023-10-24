@@ -1,0 +1,6 @@
+--SYSTEM FUNCTIONS:
+select CURRENT_ACCOUNT(), 
+        CURRENt_USER(),
+        CURRENT_SESSION(),
+        CURRENT_ROLE(),
+        CURRENT_REGION();

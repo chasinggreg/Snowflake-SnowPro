@@ -1,0 +1,50 @@
+/*
+-- There are 3 types of Streams in Snowflake:
+    - Standard
+    - Append only
+    - Insert only
+*/
+
+--------------------------------------------------------------------------------------
+---------------------------------- STANDARD STREAMS ----------------------------------
+--------------------------------------------------------------------------------------
+
+-------------------- EXAMPLE 1 ------------------------
+-- Create a table to store the details of employees
+create or replace table employees(employee_id number,
+                    salary number,
+                     manager_id number);
+
+-- Create a stream to track changes to data in the EMPLOYEES table
+create or replace stream employees_stream on table employees;
+
+SHOW STREAMS;
+
+DESCRIBE STREAM employees_stream;
+
+SELECT SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream');
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;
+
+-- insert values in employees table
+insert into employees values(8,40000,4),
+                                 (12,50000,9),
+                                 (3,30000,5),
+                                 (4,10000,5),
+                                 (25,35000,9);
+                                 
+-- The stream records the inserted rows
+select * from employees_stream;
+
+
+-- Consume the stream
+create or replace table employees_consumer(employee_id number,
+                     salary number);
+                     
+insert into employees_consumer select employee_id, salary from employees_stream;
+
+select * from employees_consumer;
+
+SELECT SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream');
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;

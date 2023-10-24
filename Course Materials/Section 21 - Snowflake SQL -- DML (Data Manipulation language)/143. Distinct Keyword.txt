@@ -1,0 +1,23 @@
+-- distinct keyword
+#### Used to find unique rows/values by removing duplicate data from the table;
+
+select c_nationkey from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select distinct c_nationkey from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select distinct * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+create or replace table A(id number,
+               name varchar);
+               
+select * from A;
+
+insert into A values(1,'A'),
+                    (2,'D'),
+                    (3,'C'),
+                    (2,'D'),
+                    (1,'B');
+
+select * from A;
+
+select distinct * from A ;

@@ -1,0 +1,93 @@
+/* 
+-- Create Resource monitor using SQL queries
+
+To create a monitor that starts monitoring immediately, resets at the beginning of each month, 
+and suspends the assigned warehouse assigned when the used credits reach 100% of the credit quota:
+*/
+
+use role accountadmin;
+
+create or replace resource monitor monitor1 with credit_quota=15
+  triggers on 100 percent do suspend;
+
+alter warehouse compute_wh set resource_monitor = monitor1;
+
+
+/*
+To create a monitor that is similar to the first example, but suspends at 90% 
+ and suspends immediately at 100% to prevent all warehouses in the account from consuming credits after the quota has been reached:
+*/
+
+use role accountadmin;
+
+create or replace resource monitor monitor2 with credit_quota=100
+  triggers on 90 percent do suspend
+           on 100 percent do suspend_immediate;
+
+alter warehouse compute_wh set resource_monitor = monitor2;
+
+
+/*
+To create a monitor that is similar to the first example, but lets the assigned warehouse exceed the quota by 10% 
+and also includes two notification actions to alert account administrators as the used credits reach the halfway and three-quarters points for the quota:
+*/
+use role accountadmin;
+
+create or replace resource monitor monitor3 with credit_quota=120
+   triggers on 50 percent do notify
+            on 75 percent do notify
+          on 100 percent do suspend
+            on 110 percent do suspend_immediate;
+
+alter warehouse compute_wh set resource_monitor = monitor3;
+
+
+/*
+To create an account-level resource monitor that starts immediately (based on the current timestamp), resets monthly on the same day 
+and time, has no end date or time, and suspends the assigned warehouse when the used credits reach 100% of the quota:
+*/
+
+use role accountadmin;
+
+create or replace resource monitor monitor_freq1 with credit_quota=50
+    frequency = monthly
+    start_timestamp = immediately
+    triggers on 100 percent do suspend;
+
+alter warehouse compute_wh set resource_monitor = monitor_freq1;
+
+
+
+/*
+To create a resource monitor that starts at a specific date and time in the future, resets weekly on the same day and time, 
+has no end date or time, and performs two different suspend actions at different thresholds on two assigned warehouses:
+*/
+
+use role accountadmin;
+
+create or replace resource monitor monitor_freq2 with credit_quota=200
+    frequency = weekly
+  start_timestamp = '2020-09-22 00:00 PST'
+    triggers on 80 percent do suspend
+             on 100 percent do suspend_immediate;
+
+alter warehouse compute_wh set resource_monitor = monitor_freq2;
+
+alter warehouse pc_matillion_wh set resource_monitor = monitor_freq2;
+
+
+
+-- Setting a Resource Monitor for Account
+
+use role accountadmin;
+
+create resource monitor account_monitor with credit_quota=500
+  triggers on 100 percent do suspend;
+
+alter account set resource_monitor = account_monitor;
+
+
+
+-- ALTER RESOURCE MONITORS
+
+alter resource monitor monitor1 set credit_quota = 150;

@@ -1,0 +1,24 @@
+-------- AUTOINCREMENT --------
+/*
+-- Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
+-- Often this is the primary key field that we would like to be created automatically every time a new record is inserted.
+*/
+
+create or replace table employees(row_number integer autoincrement start 102000 increment 10,
+                     employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+                     
+insert into employees (employee_id, empl_join_date, dept, salary, manager_id) 
+                           values(1,'2014-10-01','HR',40000,4),
+                                 (2,'2014-09-01','Tech',50000,9),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (4,'2017-09-01','HR',10000,5),
+                                 (5,'2019-09-01','HR',35000,9),
+                                 (6,'2015-09-01','Tech',90000,4),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (7,'2016-09-01','Marketing',20000,1);
+
+select * from employees;

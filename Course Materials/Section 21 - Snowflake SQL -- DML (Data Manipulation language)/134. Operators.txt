@@ -1,0 +1,31 @@
+---------------- Operators in SQL
+1.) Arithmetic Operators
+2.) Comparison Operators
+3.) Logical Operators
+
+Arithmetic Operators:
+    + -> Addition
+    - -> Subtraction
+    * -> Multiplication
+    / -> Division
+    % -> Modulus -> Provides remainder value after division
+    
+    5/2 = 1
+    
+Comparison Operators:
+    <  -> Less than
+    >  -> Greater than
+    <= -> Less than equal to
+    >= -> Greater than equal to
+    =  -> Equal to
+    != -> Not equal to
+    <> -> Not equal to
+    
+Logical Operators:
+    AND
+    OR
+    IN
+    NOT IN
+    BETWEEN
+    LIKE
+    CONTAINS

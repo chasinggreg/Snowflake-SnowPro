@@ -1,0 +1,23 @@
+-- RIGHT JOIN (Many to Many Relationship)
+
+select * from A;
+
+select * from B;
+
+select B.*, A.name from A right join B
+on B.id = A.id
+order by B.id;
+
+
+-- INNER JOIN
+
+select B.*, A.name from A inner join B
+on B.id = A.id
+order by B.id;
+
+
+-- FULL JOIN
+
+select B.*, A.name from A full join B
+on B.id = A.id
+order by B.id;

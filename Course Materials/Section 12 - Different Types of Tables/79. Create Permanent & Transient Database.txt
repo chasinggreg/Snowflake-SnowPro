@@ -1,0 +1,68 @@
+---------------- Types of Objects in snowflake ----------------
+/*
+-- It becomes very important to decide which type of DATABASE, SCHEMA OR TABLE you want to create according to requirements
+-- Infact, this is one of the design considerations that need to take place primarily to manage the cost of the storage in the snowflake data platform.
+
+-- Snowflake offers three types of objects: 
+    - Temporary : 
+        - Only exist within the session in which they are created and exists only for the remainder of the same session.
+        - They are not visible to other users or sessions and do not support some standard features like cloning.
+        - Once the session ends, data stored in the table is purged/removed completely from the system and, 
+          therefore, is not recoverable, either by the user who created the table or Snowflake.
+          
+    - Transient : 
+        - Persist until explicitly dropped and are available to all users with the appropriate privileges.
+        - Specifically designed for transitory data that needs to be maintained beyond each session (in contrast to temporary tables)
+        
+    - Permanent : <This is a default table type>
+        - Similar to transient tables with the key difference that permanent tables do have a Fail-safe period. 
+          Which provides an additional level of data protection and recovery.
+        - Permanent tables can have high number of Time Travel retention days in comparison to Transient & Temporary tables
+        
+We can create (TEMPORARY/TRANSIENT/PERMANENT) TABLES and,
+              (TRANSIENT/PERMANENT) DATABASES & SCHEMAS
+*/
+
+--------- Create TRANSIENT Database ---------
+CREATE OR REPLACE TRANSIENT DATABASE DEVELOPMENT;
+
+SHOW DATABASES;
+
+DESC DATABASE DEVELOPMENT;
+
+USE DATABASE DEVELOPMENT;
+
+CREATE OR REPLACE SCHEMA EMPLOYEE;
+
+SHOW SCHEMAS;
+
+create or replace table EMPLOYEES(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+
+SHOW TABLES;
+
+DROP DATABASE DEVELOPMENT;
+
+--------- Create PERMANENT Database ---------
+CREATE OR REPLACE DATABASE DEVELOPMENT_PERM;
+
+SHOW DATABASES;
+USE DATABASE DEVELOPMENT_PERM;
+
+CREATE OR REPLACE SCHEMA EMPLOYEE;
+SHOW SCHEMAS;
+
+create or replace table EMPLOYEES(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+
+SHOW TABLES;
+
+DROP DATABASE DEVELOPMENT_PERM;
+
+

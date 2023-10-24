@@ -1,0 +1,14 @@
+-- CASE statement in ORDER BY Clause
+
+select *, case 
+    when dept = 'HR' then '1'
+    when dept = 'Tech' then '2'
+    when dept = 'Marketing' then 'NULL'
+    else 'INVALID'
+    end as department
+from employee
+order by 
+case
+  when department = 'NULL' then salary
+  else department
+  end;

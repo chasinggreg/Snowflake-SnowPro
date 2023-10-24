@@ -1,0 +1,36 @@
+// create database
+create database company;
+
+create or replace database company;
+
+show databases like 'c%';
+
+use database demo_db;
+
+
+// create schema
+create or replace schema employee;
+create schema if not exists department;
+drop schema if exists department;
+
+show schemas like 'e%';
+
+use schema information_schema;
+use schema public;
+
+
+//create table
+create table EMPLOYEE.A(id number,
+               name varchar(20));
+
+create or replace table B(id number(32,5),
+               salary number,
+               department varchar(10));
+               
+-- precision, scale: These are the parameters that can be passed with various datatypes such as number
+                    -- Precision is the length of string/number that column can have 
+                    -- Scale is the number of digits that will be allowed after (.)
+                    -- Example: number(38,5) shows that precision is 38 and scale is 5
+               
+---- To view all snowflake supported datatypes, refer to below URL:
+-- https://docs.snowflake.com/en/sql-reference/data-types.html

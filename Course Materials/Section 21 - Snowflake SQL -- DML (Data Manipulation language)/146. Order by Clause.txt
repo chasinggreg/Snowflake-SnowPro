@@ -1,0 +1,23 @@
+-- ORDER BY
+/* Used to sort the values by specific columns. 
+    By default, it is sorted in ASCENDING order but we can sort data in DESCENDING order too
+    KEYWORDS for sorting: 'ASC' for ascending and 'DESC' for descending
+*/
+   
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS";
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" order by o_orderpriority;
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" order by o_orderpriority desc;
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" order by o_orderpriority desc, o_orderstatus;
+
+select o_orderpriority,
+    o_orderstatus,
+    count(o_orderkey) count_of_orders,
+    sum(o_totalprice) as total_price
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS"
+group by o_orderpriority,
+        o_orderstatus
+order by o_orderpriority,
+        total_price desc;

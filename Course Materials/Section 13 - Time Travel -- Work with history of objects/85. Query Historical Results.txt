@@ -1,0 +1,21 @@
+-- QUERY HISTORICAL DATA
+
+-- query selects historical data from a table as of the date and time represented by the specified timestamp:
+
+select current_timestamp();
+
+ALTER SESSION SET TIMEZONE = 'UTC';
+
+select * from employees before(timestamp => '2020-09-10 20:50:28.944 +0000'::timestamp);
+
+
+-- query selects historical data from a table as of 5 minutes ago:
+
+select * from employees at(offset => -60*7);
+
+
+-- query selects historical data from a table up to, but not including any changes made by the specified statement:
+
+select * from employees before(statement => '0196d7be-002d-94a5-0000-45750002d276');
+
+select * from employees before(statement => '0196d7b7-0046-2872-0000-45750002b1be');

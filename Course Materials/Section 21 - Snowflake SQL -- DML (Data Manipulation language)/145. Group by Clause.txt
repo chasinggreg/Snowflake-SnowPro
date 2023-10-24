@@ -1,0 +1,31 @@
+-- GROUP BY 
+#### This is used when you want to perform any analysis or to summarize the data, in order to view the high level picture about the data
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select *, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+group by c_mktsegment;
+
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+group by c_mktsegment;
+
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS";
+
+select o_orderpriority,
+    count(o_orderkey) as num_of_orders,
+    sum(o_totalprice) as total_price
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS"
+group by o_orderpriority;
+
+select o_orderpriority,
+    o_orderstatus,
+    count(o_orderkey),
+    sum(o_totalprice) as total_price
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS"
+group by o_orderstatus,o_orderpriority
+order by o_orderstatus;

@@ -1,0 +1,23 @@
+-- ABS: Returns the absolute value of a numeric expression.
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select *, abs(c_acctbal) as positive_acct_bal from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+-- CEIL: Returns values rounded to the nearest equal or larger integer
+select *, ceil(c_acctbal) as positive_acct_bal from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+-- FLOOR: Returns values rounded to the nearest equal or smaller integer
+select *, floor(c_acctbal) as positive_acct_bal from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+-- COALESCE: Returns the first non-NULL expression among its arguments, or NULL if all its arguments are NULL.
+SELECT column1, column2, column3, coalesce(column1, column2, column3)
+FROM (values
+  (1,    2,    3   ),
+  (null, 2,    3   ),
+  (null, null, 3   ),
+  (null, null, null),
+  (1,    null, 3   ),
+  (1,    null, null),
+  (1,    2,    null)
+) x;
+

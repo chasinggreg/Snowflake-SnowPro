@@ -1,0 +1,45 @@
+/*
+-- HAVING
+    - The HAVING Clause enables you to specify conditions that filters the grouped results.
+    - The WHERE clause place conditions on the selected columns, 
+        whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
+    - The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.
+*/
+
+---- Problem statement: Find c_mktsegment which has grouped account balance greater than 1280000
+
+// below query will not work, since where works on individual row level and uses original column names of the table
+  // in this case, acct_bal which is the derived column in the query cannot be used with where
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER";
+
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+where acct_bal > 1280000
+group by c_mktsegment;
+
+/* below query will not work, since where works on individual row level and uses original column names of the table
+   In this case, if we use c_acctbal which is the original column from the table will not give us the desired results as there is 
+   no c_acctbal which is greater than 1280000. Also where will not check each c_mktsegment*/
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+where c_acctbal > 1280000
+group by c_mktsegment;
+
+/* Below query will work as we are using HAVING clause with the derived column 'acct_bal' which will check acct_bal > 1280000 for the 
+    grouped account balance for each c_mktsegment */
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+group by c_mktsegment
+having acct_bal > 1280000;
+
+-- HAVING with 'avg'
+select c_mktsegment, 
+    sum(c_acctbal) as acct_bal
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER"
+group by c_mktsegment
+having acct_bal < (select avg(avg_acctbal) from 
+                   (select sum(c_acctbal) as avg_acctbal from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" group by c_mktsegment));

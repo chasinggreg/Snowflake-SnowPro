@@ -1,0 +1,108 @@
+-------------------------- STEPS NOT REQUIRED IF AZURE INTEGRATION OBJECT IS ALREADY CREATED ------------------------------------
+--CREATE INTEGRATION OBJECT FOR EXTERNAL STAGE
+CREATE STORAGE INTEGRATION AZURE_INT
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = AZURE
+  ENABLED = TRUE
+  AZURE_TENANT_ID = '27934215-17ad-40c9-b658-6dde6a4bbdcd'
+STORAGE_ALLOWED_LOCATIONS = ('azure://snowflakeazuredemo123.blob.core.windows.net/snowflake-demo/', 'azure://snowflakeazuredemo123.blob.core.windows.net/snowflake-demo-parquet/');
+  --STORAGE_BLOCKED_LOCATIONS = ('AZURE://MYACCOUNT.BLOB.CORE.WINDOWS.NET/MYCONTAINER1/MYPATH1/SENSITIVEDATA/', 'AZURE://MYACCOUNT.BLOB.CORE.WINDOWS.NET/MYCONTAINER2/MYPATH2/SENSITIVEDATA/');
+  
+--DESCRIBE INTEGRATION OBJECT TO AUTHORIZE SNOWFLAKE TO FETCH DATA FROM AZURE STORAGE ACCOUNTS
+DESC STORAGE INTEGRATION AZURE_INT;
+----------------------------------------------------------------------------------------------------------------------------------
+
+------------- LOAD PARQUET DATA -------------
+CREATE or replace TABLE AZURE_HEALTHCARE_PARQUET(
+    AVERAGE_COVERED_CHARGES    VARCHAR(150)  
+   ,AVERAGE_TOTAL_PAYMENTS    VARCHAR(150)  
+   ,TOTAL_DISCHARGES    VARCHAR(150)   
+   ,BACHELORORHIGHER    VARCHAR(150)   
+   ,HSGRADORHIGHER    VARCHAR(150)   
+   ,TOTALPAYMENTS    VARCHAR(128)  
+   ,REIMBURSEMENT    VARCHAR(128)  
+   ,TOTAL_COVERED_CHARGES    VARCHAR(128) 
+   ,REFERRALREGION_PROVIDER_NAME    VARCHAR(256)  
+   ,REIMBURSEMENTPERCENTAGE    VARCHAR(150)   
+   ,DRG_DEFINITION    VARCHAR(256)  
+   ,REFERRAL_REGION    VARCHAR(26)  
+   ,INCOME_PER_CAPITA    VARCHAR(150)   
+   ,MEDIAN_EARNINGSBACHELORS    VARCHAR(150)   
+   ,MEDIAN_EARNINGS_GRADUATE    VARCHAR(150) 
+   ,MEDIAN_EARNINGS_HS_GRAD    VARCHAR(150)   
+   ,MEDIAN_EARNINGSLESS_THAN_HS    VARCHAR(150) 
+   ,MEDIAN_FAMILY_INCOME    VARCHAR(150)   
+   ,NUMBER_OF_RECORDS    VARCHAR(150)  
+   ,POP_25_OVER    VARCHAR(150)  
+   ,PROVIDER_CITY    VARCHAR(128)  
+   ,PROVIDER_ID    VARCHAR(150)   
+   ,PROVIDER_NAME    VARCHAR(256)  
+   ,PROVIDER_STATE    VARCHAR(128)  
+   ,PROVIDER_STREET_ADDRESS    VARCHAR(256)  
+   ,PROVIDER_ZIP_CODE    VARCHAR(150) 
+   ,filename    VARCHAR
+   ,file_row_number VARCHAR
+ ,load_timestamp timestamp default TO_TIMESTAMP_NTZ(current_timestamp)
+);
+
+--create parquet file format
+create or replace file format demo_db.public.parquet_format
+  type = 'parquet';
+  
+-- CREATE STAGE OBJECT TO LET SNOWFLAKE KNOW FROM WHERE TO PICK THE FILES
+CREATE OR REPLACE STAGE DEMO_DB.PUBLIC.MY_AZURE_PARQUET_STAGE
+STORAGE_INTEGRATION = AZURE_INT
+URL = 'azure://snowflakeazuredemo123.blob.core.windows.net/snowflake-demo-parquet/health.parquet'
+FILE_FORMAT = PARQUET_FORMAT;
+  
+-- USE COPY COMMAND TO INGEST DATA FROM AZURE
+-- LOAD PARQUET DATA BY CONVERTING INTO STRUCTURED FORMAT
+copy into demo_db.public.AZURE_HEALTHCARE_PARQUET
+from (select 
+$1:average_covered_charges::varchar,
+$1:average_total_payments::varchar,
+$1:total_discharges::varchar,
+$1:"PERCENT_Bachelor's_or_Higher"::varchar,
+$1:percent_hs_grad_or_higher::varchar,
+$1:total_payments::varchar,
+$1:percent_reimbursement::varchar,
+$1:total_covered_charges::varchar,
+$1:referral_region_provider_name::varchar,
+$1:reimbursement_percentage::varchar,
+$1:drg_definition::varchar,
+$1:referral_region::varchar,
+$1:income_per_capita::varchar,
+$1:median_earnings_bachelors::varchar,
+$1:median_earnings_graduate::varchar,
+$1:median_earnings_hs_grad::varchar,
+$1:median_earnings_less_than_hs::varchar,
+$1:median_family_income::varchar,
+$1:number_of_records::varchar,
+$1:pop_25_over::varchar,
+$1:provider_city::varchar,
+$1:provider_id::varchar,
+$1:provider_name::varchar,
+$1:provider_state::varchar,
+$1:provider_street_address::varchar,
+$1:provider_zip_code::varchar,
+METADATA$FILENAME,
+METADATA$FILE_ROW_NUMBER,
+TO_TIMESTAMP_NTZ(current_timestamp)
+from @demo_db.public.MY_AZURE_PARQUET_STAGE);
+
+select * from AZURE_HEALTHCARE_PARQUET;
+
+-- LOAD PARQUET DATA WITHOUT CONVERTING INTO STRUCTURED FORMAT
+CREATE or replace TABLE HEALTHCARE_PARQUET_DEMO(
+    parquet_temp_data VARIANT
+   ,filename    VARCHAR
+   ,file_row_number VARCHAR
+   ,load_timestamp timestamp default TO_TIMESTAMP_NTZ(current_timestamp)
+);
+
+copy into demo_db.public.healthcare_parquet_demo
+from (select *,
+      METADATA$FILENAME,
+      METADATA$FILE_ROW_NUMBER,
+      TO_TIMESTAMP_NTZ(current_timestamp)
+from @demo_db.public.MY_AZURE_STAGE);

@@ -1,0 +1,36 @@
+----------------- CASE STATEMENT -----------------
+/*
+- The CASE statement goes through conditions and returns a value when the first condition is met (like an IF-THEN-ELSE statement). 
+- Once a condition is true, it will stop reading and return the result. 
+- If none of the conditions are true, it returns the value in the ELSE clause.
+- If there is no ELSE part and no conditions are true, it returns NULL value.
+*/
+
+create or replace table employee(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+                     
+insert into employee values(1,'2014-10-01','HR',40000,4),
+                                 (2,'2014-09-01','Tech',50000,9),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (4,'2017-09-01','HR',10000,5),
+                                 (5,'2019-09-01','HR',35000,9),
+                                 (6,'2015-09-01','Tech',90000,4),
+                                 (7,'2016-09-01','Marketing',20000,1);
+
+/************** CASE - case_value **************/
+select *, case dept
+    when 'HR' then 'Human Resource'
+    when 'Tech' then 'Technology' 
+    end case
+from employee;
+
+-- rename CASE column
+
+select *, case dept
+    when 'HR' then 'Human Resource'
+    when 'Tech' then 'Technology'  
+    end as flag
+from employee; 

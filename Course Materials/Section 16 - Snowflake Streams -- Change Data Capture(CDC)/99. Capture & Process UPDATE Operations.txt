@@ -1,0 +1,22 @@
+-------------------- EXAMPLE 2 - UPDATE ------------------------
+
+select * from employees_stream;
+
+SELECT SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream');
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;
+
+-- Create a table to store the details of employees
+update employees set salary = salary + 10000 where salary < 33000;
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;
+
+select * from employees_stream;
+
+insert into employees_consumer select employee_id, salary 
+                                from employees_stream 
+                                where METADATA$ACTION = 'INSERT' and METADATA$ISUPDATE = 'TRUE';
+
+select * from employees_consumer;
+
+SELECT to_timestamp(SYSTEM$STREAM_GET_TABLE_TIMESTAMP('employees_stream')) as stream_offset;

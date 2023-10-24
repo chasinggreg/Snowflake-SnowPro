@@ -1,0 +1,45 @@
+------------------------ JOINS ------------------------
+
+/* 
+What are Joins?
+-- A SQL Join statement is used to combine data or rows from two or more tables based on a common field between them.
+-- Common fields are also known as keys
+
+Types of keys used in JOINS:
+-- primary_key: primary key is a field in a table which uniquely identifies each row/record in a database table. 
+                Primary keys must contain unique values. 
+                A primary key column cannot have NULL values
+                
+-- foreign_key: A FOREIGN KEY is a key used to link two tables together.
+                A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table
+
+What are the different types of joins?
+-- There are 4 types of joins in SQL:
+    - left join: Fetch everything from left table and just common data from right table
+                 The rows for which there is no matching row on right side, the result-set will contain NULL. 
+                 LEFT JOIN is also known as LEFT OUTER JOIN
+                 
+    - right join: Fetch everything from right table and just common data from left table
+                  The rows for which there is no matching row on left side, the result-set will contain NULL. 
+                  RIGHT JOIN is also known as RIGHT OUTER JOIN
+                  
+    - inner join: Fetch rows from both the tables as long as the condition satisfies
+    
+    - full join: Fetch the result-set by combining result of both LEFT JOIN and RIGHT JOIN. 
+                 The result-set will contain all the rows from both the tables. 
+                 The rows for which there is no matching, the result-set will contain NULL values.
+    
+-- one more special type of join    
+    - self join
+
+What happens in backend when a join is performed between two tables?
+-- Crossproduct / Cartesian product: 
+    - It returns the Cartesian product of both the tables. 
+    - Cartesian product means Number of Rows present in Table 1 Multiplied by Number of Rows present in Table 2
+    
+Types of possible relationships between data in two tables:
+    - 1 to 1
+    - 1 to many
+    - many to many
+    
+------------------------------------------------------------------------------------------------------------------*/

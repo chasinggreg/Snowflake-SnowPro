@@ -1,0 +1,15 @@
+/*
+DDL - Data Definition Language
+
+-- It consists of the SQL commands that can be used to define or make changes in the database objects. 
+-- It simply deals with descriptions and is used to create and modify the structure of database objects in the database. 
+
+Examples of DDL commands:
+
+    * CREATE – is used to create the database or its objects (like table, index, function, views, triggers and store procedure).
+    * DROP – is used to delete objects from the database.
+    * ALTER - is used to alter the structure of the database.
+    * TRUNCATE – is used to remove all records from a table, including all spaces allocated for the records are removed.
+    * COMMENT – is used to add comments to the data dictionary.
+
+*/

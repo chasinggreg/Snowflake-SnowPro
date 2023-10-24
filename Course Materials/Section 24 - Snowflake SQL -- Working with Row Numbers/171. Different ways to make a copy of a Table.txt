@@ -1,0 +1,38 @@
+---------------------- COPY TABLE ----------------------
+-- How to create a copy of existing table?
+
+create or replace table new_employees(employee_id number,
+                     empl_join_date date,
+                     dept varchar(10),
+                     salary number,
+                     manager_id number);
+                     
+insert into new_employees values(8,'2014-10-01','HR',40000,4),
+                                 (12,'2014-09-01','Tech',50000,9),
+                                 (3,'2018-09-01','Marketing',30000,5),
+                                 (4,'2017-09-01','HR',10000,5),
+                                 (25,'2019-09-01','HR',35000,9),
+                                 (12,'2014-09-01','Tech',50000,9),
+                                 (86,'2015-09-01','Tech',90000,4),
+                                 (73,'2016-09-01','Marketing',20000,1);
+
+-------- using CREATE TABLE AS SELECT --------- <Also referred as CTAS>
+--drop table employees;
+create or replace table employees as select * from new_employees;
+
+
+insert into employees select * from new_employees;
+
+select * from employees;
+
+
+------------ using CLONE keyword ------------
+CREATE OR REPLACE TABLE employees_clone CLONE employees;
+
+select * from employees_clone;
+
+
+------------ using LIKE keyword ------------
+CREATE OR REPLACE TABLE employees_like LIKE employees;
+
+select * from employees_like;

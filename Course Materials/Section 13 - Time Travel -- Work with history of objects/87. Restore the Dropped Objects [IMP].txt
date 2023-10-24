@@ -1,0 +1,44 @@
+/*
+
+-- DROPPING AND RESTORING OBJECTS --
+
+When a table, schema, or database is dropped, it is not immediately overwritten or removed from the system. 
+Instead, it is retained for the data retention period for the object, during which time the object can be restored. 
+Once dropped objects are moved to Fail-safe, you cannot restore them.
+
+*/
+
+show tables history like 'employees%' in demo_db.public;
+
+show schemas history in demo_db;
+
+show databases history;
+
+drop database development;
+
+drop schema demo_db.employee;
+
+drop table demo_db.employee_perm.employees;
+
+-- The output includes all dropped objects and an additional DROPPED_ON column, which displays the date and time when the object was dropped. 
+-- If an object has been dropped more than once, each version of the object is included as a separate row in the output.
+
+
+/*
+
+-- RESTORING OBJECTS --
+A dropped object that has not been purged from the system (i.e. the object is displayed in the SHOW <object_type> HISTORY output) 
+can be restored using the following commands:
+
+Calling UNDROP restores the object to its most recent state before the DROP command was issued.
+
+*/
+
+undrop table demo_db.employee_perm.employees;
+
+undrop schema demo_db.employee;
+
+undrop database development;
+
+-- If an object with the same name already exists, UNDROP fails. 
+-- You must rename the existing object, which then enables you to restore the previous version of the object.

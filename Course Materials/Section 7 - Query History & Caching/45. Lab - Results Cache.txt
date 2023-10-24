@@ -1,0 +1,7 @@
+-- While working on a complex query, results of previous query comes handy
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCDS_SF100TCL"."CATALOG_PAGE";
+
+select  cp_Department, cp_catalog_page_sk, cp_Description
+    from table(result_scan(last_query_id()))
+  where cp_catalog_page_sk < 6;

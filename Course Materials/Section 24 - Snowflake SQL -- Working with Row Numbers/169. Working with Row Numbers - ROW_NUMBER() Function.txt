@@ -1,0 +1,11 @@
+-------- ROW_NUMBER function --------
+-- Returns a unique row number for each row within a partition.
+-- The row number starts at 1 and continues up sequentially.
+
+select * from employees;
+
+select row_number() over (partition by dept order by salary desc) as counter, * from employees;
+
+select row_number() over (order by NULL) as counter, * from employees;
+
+select row_number() over (order by 1) as counter, * from employees;

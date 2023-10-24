@@ -1,0 +1,16 @@
+-- let us make some changes in employees table, it should not affect employees_clone table.
+
+DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = 12;
+
+SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = 12;
+
+SELECT * FROM EMPLOYEES_CLONE WHERE EMPLOYEE_ID = 12;
+
+
+-- let us make some changes in employees_clone table, it should not affect employees table.
+
+DELETE FROM EMPLOYEES_CLONE WHERE EMPLOYEE_ID = 8;
+
+SELECT * FROM EMPLOYEES_CLONE WHERE EMPLOYEE_ID = 8;
+
+SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = 8;

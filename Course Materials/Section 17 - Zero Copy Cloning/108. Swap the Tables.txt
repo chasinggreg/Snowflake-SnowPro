@@ -1,0 +1,4 @@
+-- Swap tables
+-- It do not swap the underline storage rather it just changes the metadata reference of tables.
+
+ALTER TABLE employees SWAP WITH employees_consumer;

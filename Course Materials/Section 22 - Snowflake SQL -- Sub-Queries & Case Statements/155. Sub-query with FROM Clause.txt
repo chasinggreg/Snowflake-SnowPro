@@ -1,0 +1,13 @@
+-- SUBQUERY in FROM clause
+
+select *
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" as A
+inner join (select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+           where o_orderpriority = '5-LOW') B
+on A.c_custkey = B.o_custkey;
+
+select *
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."CUSTOMER" as A
+inner join (select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF001"."ORDERS" 
+         where o_orderpriority IN ('5-LOW','1-URGENT')) B
+on A.c_custkey = B.o_custkey;

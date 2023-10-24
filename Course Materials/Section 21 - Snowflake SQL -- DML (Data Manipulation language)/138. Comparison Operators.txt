@@ -1,0 +1,14 @@
+# 2.) Comparison Operators
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER" limit 100;
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    where c_acctbal < '1000.00' limit 100;
+    
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    where c_acctbal >= '1000.00' and c_nationkey <= 10 limit 100;
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    where c_acctbal > '1000.00' and c_nationkey != 10 limit 100;
+
+select * from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+    where c_mktsegment = 'FURNITURE' and c_nationkey <> 10 limit 100;

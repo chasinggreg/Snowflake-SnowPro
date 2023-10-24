@@ -1,0 +1,84 @@
+// 1.) LEFT JOIN
+
+create or replace table A(id number,
+               name varchar(20));
+               
+create or replace table B(id number,
+               salary number);
+               
+select * from A;
+select * from B;
+
+-- 1 to 1 Relationship
+insert into A values(1,'A'),
+                    (2,'B'),
+                    (3,'C'),
+                    (5,'D');
+                    
+insert into B values(1,100),
+                    (2,200),
+                    (3,300);
+
+select * from A;  
+select * from B;
+
+select A.*, B.salary 
+from A left join B
+on A.id = B.id;
+
+// When joining column names are different in tables
+
+create or replace table C(pid number,
+               salary number);
+
+insert into C values(1,100),
+                    (2,200),
+                    (3,300);
+                    
+select * from C;
+
+select A.*, C.salary 
+from A left join C
+on A.id = C.pid;
+
+// 1 to Many Relationship
+
+insert into A values(1,'H'),
+                    (1,'J'),
+                    (4,'K'),
+                    (3,'O');
+
+select * from A;
+
+select A.*, B.salary 
+from A left join B
+on A.id = B.id;
+
+// Many to Many Relationship
+
+insert into B values(1,450),
+                    (5,200),
+                    (3,900),
+                    (3,70),
+                    (2,170);
+
+select * from B;
+
+select A.*, B.salary 
+from A left join B
+on A.id = B.id;
+
+// how joins work when there are NULL values in the data? (IMPORTANT QUESTION)
+
+select * from A;
+
+select * from B;
+
+insert into A values(1,'A'),
+                    (NULL,NULL),
+                    (NULL,NULL),
+                    (2,'D');
+                    
+select A.*, B.salary 
+from A left join B
+on A.id = B.id;

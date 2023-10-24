@@ -1,0 +1,71 @@
+/*
+DML - Data Manipulation Language
+
+-- SQL commands that deals with the manipulation of data present in the database belong to DML or Data Manipulation Language.
+-- this includes various SQL Statements such as:
+
+    * INSERT – is used to insert data into a table.
+    * UPDATE – is used to update existing data within a table.
+    * DELETE – is used to delete records from a table.
+*/
+
+create or replace table A(id number,
+               name varchar(20));
+               
+create or replace table B(id number,
+               name varchar(20));            
+               
+select * from A;
+select * from B;
+
+insert into A values(1,'Aman'),
+                    (2,'Bhavesh'),
+                    (3,'Carolyn'),
+                    (5,'David');
+                    
+insert into B values(4,'Fulos'),
+                    (9,'Bhavesh'),
+                    (1,'Shanaya'),
+                    (2,'Bhavesh'),
+                    (10,'Pawan');
+                    
+insert into B (select * from A);
+
+select * from B;
+
+-- SUBQUERY in DELETE statement
+
+delete from B 
+where name = (select 
+            name from A 
+            where name = 'Bhavesh');
+              
+select * from B;
+
+-- SUBQUERY in UPDATE statement
+
+insert into B values(4,'Fulos'),
+                    (9,'Bhavesh'),
+                    (1,'Shanaya'),
+                    (2,'Bhavesh'),
+                    (10,'Pawan');
+                    
+select * from B;
+
+update B
+set name = 'Rohit'
+where name in (select distinct name
+              from A
+              where name like 'B%');
+              
+select * from B;
+
+insert into B values(1,NULL);
+
+update B
+set name = 'KASHISH'
+where name is NULL;
+
+-- be cautious while using UPDATE and DELETE operations - MAKE SURE TO USE WHERE STATEMENT
+update B
+set name = 'XYZ';
