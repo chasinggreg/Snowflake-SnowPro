@@ -70,3 +70,31 @@ This exam guide includes test domains, weightings, and objectives. It is not a c
 ## EXAM TOPICS
 
 To view exam domain, objectives and subobjectives, download the [SnowPro Core Exam Study Guide](https://learn.snowflake.com/courses/course-v1:snowflake+SPSG-CORE+B/about).
+
+## ALL THE CHAPTERS FROM THE COURSE
+
+So, how should you start once you have decided to study for this certification? In the following links, you’ll be able to find all the information regarding Snowflake to prepare you for the exam.
+
+1. [Snowflake Introduction](./introduction.md)
+2. [Snowflake Architecture](./architecture.md)
+3. [Snowflake Pricing](./pricing.md)
+4. [Snowflake Micro-partition](./micro-partitions.md)
+5. [Snowflake Clustering](./clustering.md)
+6. [Snowflake Tables & Views](./tables-views.md)
+7. [Snowflake Stage & Storage Integration](./stages-storage-integration.md)
+8. [Snowflake Data Loading, COPY INTO & SnowPipe Commands](./data-loading.md)
+9. [Snowflake PUT & GET Commands](./put-get-commands.md)
+10. [Snowflake Data Warehouses](./data-warehouses.md)
+11. [Resource Monitors](./resource-monitors.md)
+12. [Snowflake Caches and Query Performance](./caches.md)
+13. [Time Travel, Fail-Safe & Zero-Copy Cloning](./storage-features.md)
+14. [Roles in Snowflake](./snowflake-roles.md)
+15. [Snowflake Data Sharing](./data-sharing.md)
+16. [Stored Procedures & User Defined Functions](./stored-procedures-and-udfs.md)
+17. [Tasks & Transactions](./tasks-transactions.md)
+18. [Snowflake Streams](./streams.md)
+19. [Other Snowflake Objects: File Formats & Sequences](./file-formats-sequences.md)
+20. [Snowflake Ecosystem, Compliance, Data Marketplace & Security](./ecosystem.md)
+21. [Summary & Tips for the Exam](./certification-summary.md)
+22. [Snowflake SnowPro Core Practice Exam (Part 1)](./practice-exam-p1.md)
+23. [Snowflake SnowPro Core Practice Exam (Part 2)](./practice-exam-p2.md)

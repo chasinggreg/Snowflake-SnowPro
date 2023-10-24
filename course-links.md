@@ -2,15 +2,15 @@
 
 ## Interested in getting certified in the Snowflake SnowPro Core Certification? Keep reading
 
-![Course Banner](./Assets/1_cR8yM9lZxkR7MwAwHy9XqA.png)
+![Course Banner](./Assets/Snowflake-SnowPro-Core-Certification-Course.png)
 
-Hello everyone. This course was created by [Gonzalo Fernadez Plaza](https://plazagonzalo.medium.com) to help everyone trying to study for the Snowflake SnowPro Core Certification Exam or everybody trying to learn how to use Snowflake and discover all its power. It was originally published on Medium but I have curated and updated them here on Github for my reference.
+Hello everyone. This course was created by [Gonzalo Fernadez Plaza](https://plazagonzalo.medium.com) to help everyone trying to study for the Snowflake SnowPro Core Certification Exam or everybody trying to learn how to use Snowflake and discover all its power. It was originally published on [Medium](https://medium.com/) but I have curated and updated it here on Github for my reference.
 
 ---
 
 **This course is adapted to the new COF-C02 new version of the SnowPro Core Certification Exam**, released in early September 2022. It is divided into chapters with detailed content on each Snowflake functionality, cheat sheets, diagrams, and more. At the end of each chapter, I will also solve the typical exam questions to prepare you for the exam.
 
-The SnowPro Core Certification demonstrates an individual’s knowledge to apply core expertise in implementing and migrating to Snowflake. It’s also necessary to go further with the SnowPro Advanced Certifications, a **prerequisite for all advanced exams**. This course covers Snowflake architectural principles and best practices, always focusing on the questions you will face in the exam. **The exam costs $175, and you need to get a passing score of 750 on a scaled score from 0–1000**. The following picture shows the estimated percentage range of each exam part updated to the new COF-C02 model (you can find more information at https://www.snowflake.com/certifications/).
+The SnowPro Core Certification demonstrates an individual’s knowledge to apply core expertise in implementing and migrating to Snowflake. It is also necessary to go further with the SnowPro Advanced Certifications, a **prerequisite for all advanced exams**. This course covers Snowflake architectural principles and best practices, always focusing on the questions you will face in the exam. **The exam costs $175, and you need to get a passing score of 750 on a scaled score from 0–1000**. The following picture shows the estimated percentage range of each exam part updated to the new COF-C02 model (you can find more information at https://www.snowflake.com/certifications/).
 
 <figure>
   <img
