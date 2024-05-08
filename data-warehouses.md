@@ -16,7 +16,7 @@ Data warehouses in Snowflake are one of the most important parts of this technol
 
 A Data Warehouse is a cluster of computing resources in Snowflake. It provides the required resources, such as CPU, memory, and temporary storage, to perform queries and DML operations (like loading data into tables). A warehouse must be running and in use for the session to perform these operations. <b>While a warehouse is running, it consumes Snowflake credits</b>.
 
-![Virtual Warehouses in Snowflake](./Assets/virtual-warehouses-snowflake.png "Virtual Warehouses in Snowflake")
+![Virtual Warehouses in Snowflake](./Assets/virtual-warehouses-snowflake.png 'Virtual Warehouses in Snowflake')
 
 <b>Snowflake utilizes per-second billing (with a 60-second minimum each time the warehouse starts)</b>, so warehouses are billed only for the credits they consume:
 
@@ -30,19 +30,19 @@ A Data Warehouse is a cluster of computing resources in Snowflake. It provides t
 
 A Warehouse is defined by its size and other properties that we can set to help control and automate warehouse activity. Let’s take a look:
 
-![Snowflake Warehouse properties.](./Assets/snowflake-warehouse-properties.png "Snowflake Warehouse properties.")
+![Snowflake Warehouse properties.](./Assets/snowflake-warehouse-properties.png 'Snowflake Warehouse properties.')
 
 ### Size
 
 As we saw in the [chapter about pricing](./pricing.md), they might consume additional credits per hour depending on the warehouse size. <b>The size of a warehouse can impact the amount of time required to execute queries</b> submitted to the warehouse. So, a query will be executed faster in a Large warehouse than in a Small warehouse, but you will pay more credits per second. We can see some of the most common sizes in the following image:
 
-![Credits/Hour of a Warehouse depending on the size.](./Assets/credits-per-hour-warehouse-size.png "Credits/Hour of a Warehouse depending on the size.")
+![Credits/Hour of a Warehouse depending on the size.](./Assets/credits-per-hour-warehouse-size.png 'Credits/Hour of a Warehouse depending on the size.')
 
 ### Multi-Cluster Warehouses
 
 With multi-cluster warehouses, you can <b>scale compute resources to manage query concurrency</b> during, for example, peak hours. You can add additional warehouses to make a larger pool of computing resources available. <b>You need (at least) the Snowflake Enterprise Edition</b> (typical exam question) to activate this option. You can see how they look like in the following picture:
 
-![Multi-cluster warehouse diagram.](./Assets/multi-cluster-warehouse-diagram.png "Multi-cluster warehouse diagram.")
+![Multi-cluster warehouse diagram.](./Assets/multi-cluster-warehouse-diagram.png 'Multi-cluster warehouse diagram.')
 
 For a multi-cluster warehouse, the number of credits billed is calculated based on the size and the number of warehouses that run within the time period. If we run two “<i>S</i>” warehouses, we will be billed for two credits/hour \* 2 warehouses of “<i>S</i>” size, which is four credits/hour.
 
@@ -57,7 +57,7 @@ To create multi-cluster warehouses, you need to specify the following properties
 
 What is the difference between increasing the Warehouse size and multi-cluster warehouses? <b>Multi-cluster warehouses are best utilized for scaling resources to improve concurrency for users/queries</b>, also known as scale OUT/IN. <b>If we wanted to improve the performance of the queries, we should resize the warehouse</b>, also known as scale UP/DOWN the Data Warehouse.
 
-![Scale Up vs. Scale Out a Snowflake Warehouse.](./Assets/scale-up-vs-scale-out.png "Scale Up vs. Scale Out a Snowflake Warehouse.")
+![Scale Up vs. Scale Out a Snowflake Warehouse.](./Assets/scale-up-vs-scale-out.png 'Scale Up vs. Scale Out a Snowflake Warehouse.')
 
 > **_Multi-warehouse modes_**
 
@@ -84,6 +84,30 @@ Snowflake can suspend the warehouse if it’s inactive for a specific period of 
 Auto Resume allows Snowflake to <b>automatically resume the warehouse when any statement requires the use of the warehouse</b>, like any query or DML command. By default, it’s also enabled.
 
 ---
+
+## WHAT IS A WAREHOUSE IN SNOWFLAKE
+
+Defining "Warehouse" in Snowflake:
+
+- People who have been working with data for awhile might think of the term "Data Warehouse" as referring to a special collection of data structures, but in Snowflake, warehouses don't store data.
+- In Snowflake, Warehouses are "workforces" -- they are used to perform the processing of data.
+- When you create a Warehouse in Snowflake, you are defining a "workforce."
+
+Teams are Clusters, Team Members are Servers:
+
+- In the video, the workforce of each warehouse is a team. A small warehouse has a small team, but just one team. An extra-large warehouse has a large team, but just one team.
+- Snowflake Warehouse Sizes like eXtra-Small, Small, Medium, etc. all have one cluster. A small warehouse has one cluster made up of just a few servers. A larger warehouse has one cluster, made up of more servers.
+
+Scaling Up and Down:
+
+- Changing the size of warehouse changes the number of servers in the cluster.
+- Changing the size of an existing warehouse is called scaling up or scaling down.
+
+Scaling In and Out:
+
+- If multi-cluster/elastic warehousing is available (Enterprise edition or above) a warehouse is capable of scaling out in times of increased demand. (Adding temporary teams, made up of a collection of temporary workers).
+- If multi-cluster scaling out takes place, clusters are added for the period of demand and then clusters are removed (snap back) when demand decreases. (Removing temporary teams).
+- The number of servers in the original cluster dictates the number of servers in each cluster during periods where the warehouse scales out by adding clusters.
 
 ## SNOWFLAKE SNOWPRO EXAM QUESTIONS
 
