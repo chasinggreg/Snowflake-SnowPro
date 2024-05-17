@@ -54,7 +54,7 @@ In the following images, we compare the main features provided by each Snowflake
 
 <figure>
   <img
-  src="./Assets/1_XgyA-4g7DGEQxlJuGlm0jA.png"
+  src="./Assets/1_HXboUFECgF6SkAcm0uC6Lg.png/"
   alt="Snowflake features by edition">
   <figcaption align = "center">Summary of the Snowflake features by edition.</figcaption>
 </figure>
